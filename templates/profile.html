@@ -1,0 +1,82 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Piazzolla:wght@300;400;500&display=swap">
+    </head>
+
+    <body>
+
+        <main class='main'>
+
+            <div class="profile_container">
+
+                <div class="profile_image_container">
+
+                    <img class="profile_image" src="{{ user.userpic.url }}">
+
+                </div>
+
+                <div class="profile_info_container">
+
+                    <div class="name_container">
+
+                        {{ user.first_name }}
+
+                    </div>
+
+                    <div class="username_container">
+
+                        {{ user.username }}
+                        
+                    </div>
+
+                    <div class="email_container">
+
+                        {{ user.email }}
+
+                    </div>
+
+                    <div class="phone_container">
+
+                        +79780296680
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button class="profile_edit_button"> Редактировать </button>
+
+            <div class="passed_tests_container">
+
+                <div class="passed_tests_header">
+
+                    Пройденные тесты
+
+                </div>
+
+                {% for test in tests %}
+
+                    {% if test.is_completed %}
+
+                <a class="profile_test_link" href="{% url 'test_results' test.test.id %}"> {{ test.test }} </a> 
+
+                    {% endif %}
+
+                {% endfor %}
+
+            </div>
+        
+        </main>
+
+    </body>
+
+</html>

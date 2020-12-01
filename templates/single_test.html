@@ -1,0 +1,72 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="{% static 'css/single_test.css' %}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Piazzolla:wght@300;400;500&display=swap">
+    </head>
+
+    <body>
+
+        <main class='main'>
+
+            <input class="hidden_input" id="token" value="{{ csrf_token }}">
+            <input class="hidden_input" id="test_id" value="{{ test.pk }}">
+
+            <div class="test_container">
+
+                <div class="test_name">
+
+                    {{ test.name }}
+    
+                </div>
+    
+                <div class="test_description">
+    
+                    {{ test.description }}
+    
+                </div>
+
+                <div class="test_question">
+
+                    <div class="test_question_id">
+
+
+
+                    </div>
+
+                    <div class="test_question_text">
+
+
+
+                    </div>
+
+                </div>
+
+                <div class="question_options">
+
+                    
+
+                </div>
+
+                <div class="start_test_button_container">
+
+                    <button class="start_test_button"> Пройти тест </button>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="{% static 'js/single_test.js' %}"></script>
+
+    </body>
+
+</html>

@@ -1,0 +1,76 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="{% static 'css/test_results.css' %}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Piazzolla:wght@300;400;500&display=swap">
+    </head>
+
+    <body>
+
+        <main class='main'>
+
+            <div class="question_container">
+
+                {% for option in options %}
+
+                <div class="queston_text">
+
+                    {{ option.question.text }}
+
+                </div>
+
+                <div class="question_options">
+
+                    {% for option in option.question.options.all %}
+
+                    <div class="option_text">
+
+                        {{ option.text }}
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+                <div class="selected_option">
+
+                    Вы выбрали: {{ option.text }}
+
+                </div>
+
+                <div class="is_correct">
+
+                    {% if option.is_correct %}
+
+                    Ответ верный.
+                    
+                    {% else %}
+
+                    Ответ неверный
+                        
+                    {% endif %}
+
+                </div>
+
+                {% endfor %}
+
+                <div class="score_container">
+
+                    Правильных ответов: {{ score }}%
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </body>
+
+</html>

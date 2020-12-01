@@ -1,0 +1,48 @@
+body {
+    margin: 0;
+    overflow-x: hidden;
+    font-family: 'Piazzolla', serif;
+}
+
+.content_container {
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 100px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10%;
+    row-gap: 100px;
+}
+
+.test_card {
+    width: 100%;
+    text-align: center;
+}
+
+.test_image {
+    width: 75%;
+    height: 300px;
+}
+
+.test_image:hover {
+    cursor: pointer;
+}
+
+.test_card_name {
+    font-size: 40px;
+    font-weight: 400;
+}
+
+.index_link {
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+.index_link:hover {
+    border-bottom: 3px solid #000;
+}
+
+.hidden_input {
+    display: none;
+}

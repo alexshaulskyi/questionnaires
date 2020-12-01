@@ -1,0 +1,27 @@
+body {
+    margin: 0;
+    overflow-x: hidden;
+    font-family: 'Piazzolla', serif;
+}
+
+.question_container {
+    margin-left: 15%;
+    margin-top: 80px;
+}
+
+.queston_text {
+    margin-top: 20px;
+    font-size: 28px;
+}
+
+.selected_option {
+    margin-top: 20px;
+}
+
+.is_correct {
+    margin-top: 5px;
+}
+
+.score_container {
+    margin-top: 100px;
+}

@@ -1,0 +1,55 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="{% static 'css/login.css' %}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Piazzolla:wght@300;400;500&display=swap">
+    </head>
+
+    <body class="body">
+
+        <main class="main">
+
+            <div class="login_form_container">
+
+                <form class="form" method="POST" action="{% url 'login' %}">
+
+                    {% csrf_token %}
+
+                    <div class="login_form_group">
+
+                        <input id="id_username" class="form_input" name="username" type="text" placeholder="Имя пользователя">
+                        <div id="username_border" class="input_border"></div>
+
+                    </div>
+
+                    <div class="login_form_group">
+
+                        <input id="id_password" class="form_input" name="password" type="password" placeholder="Пароль">
+                        <div id="password_border" class="input_border"></div>
+
+                    </div>
+
+                    {% if invalid_login %}
+                        <span class="form__error">Имя пользователя или пароль не совпадают. Введите правильные данные.</span>
+                    {% endif %}
+
+                    <div class="registration_form_group">
+
+                        <div class="button_container">
+
+                            <button type="submit" class="submit_button"> Войти в систему </button>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </main>
