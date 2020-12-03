@@ -17,8 +17,8 @@ services:
     restart: always
     command: gunicorn questionnaires.wsgi:application --bind 0.0.0.0:8000
     volumes:
-      - static:/static
-      - media:/media
+      - ./static:/code/static/
+      - ./media:/code/media/
     ports:
       - "8000:8000"
     depends_on:
