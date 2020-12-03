@@ -23,7 +23,8 @@
                 <a class="header_link left" href="{% url 'user_profile' request.user.id %}"> Мой профиль </a>
                 <a class="header_link right" href="{% url 'logout' %}"> Выйти из системы </a>
                 {% else %}
-                <a class="header_link login" href="{% url 'login' %}"> Войти в систему </a>
+                <a class="header_link left" href="{% url 'login' %}"> Войти в систему </a>
+                <a class="header_link right" href="{% url 'signup' %}"> Зарегистрироваться </a>
                 {% endif %}
 
             </div>
