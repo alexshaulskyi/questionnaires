@@ -1,5 +1,5 @@
 <!doctype html>
-{% load static %}
+{% load static custom_tags %}
 <html lang="en">
 
     <head>
@@ -13,9 +13,14 @@
 
     <body>
 
+        {% include 'header.html' %}
+
         <main class='main'>
 
             <div class="question_container">
+
+                <input class="hidden_input" id="user_test_relation_id" value="{{ test|relation_exists:request }}">
+                <input class="hidden_input" id="token" value="{{ csrf_token }}">
 
                 {% for option in options %}
 
@@ -63,9 +68,11 @@
 
                 <div class="score_container">
 
-                    Правильных ответов: {{ score }}%
+                    Правильных ответов: {{ score }} %.
 
                 </div>
+
+                    <a class="return_button" href="{% url 'user_profile' request.user.id %}"> Вернуться в профиль </a>
 
             </div>
 

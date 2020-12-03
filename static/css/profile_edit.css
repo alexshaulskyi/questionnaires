@@ -1,0 +1,87 @@
+body {
+    margin: 0;
+    overflow-x: hidden;
+    font-family: 'Piazzolla', serif;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+}
+
+.registration_form_container {
+    width: 20%;
+    margin-left: 40%;
+    margin-top: 20vh;
+}
+
+.registration_form_group {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form_input {
+    border: 0;
+    height: 30px;
+}
+
+.form_input:focus {
+    outline: none;
+}
+
+::placeholder {
+    font-family: 'Piazzolla', serif;
+    font-size: 15px;
+}
+
+.input_border {
+    height: 2px;
+    width: 100%;
+    background-color: #B8B8B8;
+    margin-top: 2px;
+}
+
+.input_border_active_error {
+    height: 2px;
+    width: 100%;
+    background-color: red;
+    margin-top: 2px;
+}
+
+.input_border_active_correct {
+    height: 2px;
+    width: 100%;
+    background-color: #A0e989;
+    margin-top: 2px;
+}
+
+.button_container {
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 30px;
+}
+
+.submit_button {
+    background-color: #2b2b2b;
+    width: 100%;
+    border: 0;
+    height: 40px;
+    text-decoration: none;
+    color: #7F7F7F;
+}
+
+.submit_button:hover {
+    color: white;
+    text-shadow: 0px 0px 15px white;
+    cursor: pointer;
+    box-shadow: 0px 0px 20px 10px #cccccc;
+}
+
+.form_errors {
+    font-size: 12px;
+    color: red;
+}
+
+.form_file {
+    width: 20%;
+}

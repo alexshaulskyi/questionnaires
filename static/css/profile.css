@@ -22,14 +22,17 @@ body {
 }
 
 .profile_edit_button {
-    background-color: #2b2b2b;
+    display: block;
     width: 15%;
     margin-left: 15%;
-    margin-top: 25px;
-    border: 0;
     height: 40px;
     text-decoration: none;
+    background-color: #2b2b2b;
+    border: 0;
+    text-decoration: none;
     color: #7F7F7F;
+    line-height: 40px;
+    text-align: center;
 }
 
 .profile_edit_button:hover {

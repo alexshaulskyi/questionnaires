@@ -13,6 +13,8 @@
 
     <body>
 
+        {% include 'header.html' %}
+
         <main class="main">
 
             <input class="hidden_input" id="token" value="{{ csrf_token }}">
@@ -31,7 +33,7 @@
 
                     <div class="test_card_name">
 
-                        <a class="index_link" identifier="{{ test.pk }}"> {{ test.name }} </a>
+                        <a class="index_link" href="{% url 'single_test' test.pk %}"> {{ test.name }} </a>
 
                     </div>
 
@@ -42,10 +44,6 @@
             </div>
 
         </main>
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script src="{% static 'js/index.js' %}"></script>
 
     </body>
 

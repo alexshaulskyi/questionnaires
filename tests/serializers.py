@@ -19,3 +19,11 @@ class QuestionSerializer(serializers.ModelSerializer):
 
         model = Question
         fields = '__all__'
+
+
+class UserPassedTestSerializer(serializers.ModelSerializer):
+
+    class Meta:
+
+        fields = ('user', 'test', 'is_completed', 'score', 'questions_answered', 'questions_answered_amount', 'score', 'selected_options')
+        model = UserPassedTest

@@ -56,6 +56,7 @@ class UserPassedTest(models.Model):
     test = models.ForeignKey(
         Test,
         on_delete=models.CASCADE,
+        related_name='users_passed'
     )
     selected_options = models.ManyToManyField(
         Option,
@@ -70,6 +71,7 @@ class UserPassedTest(models.Model):
         blank=True
     )
     is_completed = models.BooleanField(default=False)
+    date = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return f'{self.user.username} passed {self.test.name}'

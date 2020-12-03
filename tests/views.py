@@ -16,19 +16,26 @@ class Index(ListView):
 class TestView(DetailView):
 
     model = Test
-    template_name = 'single_test.html'
+
+    def get_template_names(self):
+
+        if self.request.user.is_superuser:
+            return 'single_test_teacher.html'
+        return 'single_test.html'
 
 
 class TestResult(View):
 
     def get(self, request, pk):
 
+        test = Test.objects.get(id=pk)
+
         obj = UserPassedTest.objects.get(
             user=request.user,
-            test=Test.objects.get(id=pk)
+            test=test
         )
 
         options = obj.selected_options.all()
         score = obj.score
 
-        return render(request, 'test_results.html', {'options': options, 'score': score})
+        return render(request, 'test_results.html', {'options': options, 'test': test, 'score': score})

@@ -12,11 +12,13 @@
 
     <body class="body">
 
+        {% include 'header.html' %}
+
         <main class="main">
 
             <div class="registration_form_container">
 
-                <form method="post" action="{% url 'signup' %}" class="registration_form" enctype='multipart/form-data'>
+                <form method="post" action="{% url 'profile_edit' request.user.id %}" class="registration_form" enctype='multipart/form-data'>
 
                     {% csrf_token %}
 
@@ -82,13 +84,7 @@
 
                     <div class="registration_form_group">
 
-                        {{ form.password }}
-                        <div id="password_border" class="input_border"></div>
-                        {% if 'password' in form.errors %}
-                            {% for error in form.password.errors %}
-                                <div id="password_errors" class="form_errors"> {{ error }} </div> 
-                            {% endfor %}
-                        {% endif %}
+                        {{ form.userpic }}
 
                     </div>
 
@@ -96,7 +92,7 @@
 
                         <div class="button_container">
 
-                            <button type="submit" class="submit_button"> Зарегистрироваться </button>
+                            <button type="submit" class="submit_button"> Изменить </button>
 
                         </div>
 

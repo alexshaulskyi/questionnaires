@@ -1,5 +1,5 @@
 <!doctype html>
-{% load static %}
+{% load static custom_tags %}
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -12,8 +12,11 @@
 
     <body>
 
+        {% include 'header.html' %}
+
         <main class='main'>
 
+            <input class="hidden_input" id="user_test_relation_id" value="{{ test|relation_exists:request }}">
             <input class="hidden_input" id="token" value="{{ csrf_token }}">
             <input class="hidden_input" id="test_id" value="{{ test.pk }}">
 

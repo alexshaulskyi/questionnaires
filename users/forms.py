@@ -22,7 +22,7 @@ class SignUpForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'username', 'email', 'phone', 'password')
+        fields = ('first_name', 'last_name', 'username', 'email', 'phone', 'userpic', 'password')
         widgets = {
             'first_name': forms.TextInput(
                 attrs={
@@ -69,5 +69,24 @@ class SignUpForm(forms.ModelForm):
                     'placeholder': 'Телефон'
                 }
             ),
+            'userpic': forms.FileInput(
+                attrs={
+                    'type': 'file',
+                    'id': 'id_file',
+                    'name': 'file',
+                    'class': 'form_file'
+                }
+            ),
         
         }
+
+
+class EditProfileForm(SignUpForm):
+
+    def __init__(self, *args, **kwargs):
+        super(EditProfileForm, self).__init__(*args, **kwargs)
+        self.fields.pop('password')
+
+    class Meta(SignUpForm.Meta):
+
+        model = User

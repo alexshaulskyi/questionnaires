@@ -60,26 +60,6 @@
             </div>
 
             <a class="profile_edit_button" href="{% url 'profile_edit' request.user.id %}"> Редактировать профиль </a>
-
-            <div class="passed_tests_container">
-
-                <div class="passed_tests_header">
-
-                    Пройденные тесты
-
-                </div>
-
-                {% for test in tests %}
-
-                    {% if test.is_completed %}
-
-                <a class="profile_test_link" href="{% url 'test_results' test.test.id %}"> {{ test.test }} </a> 
-
-                    {% endif %}
-
-                {% endfor %}
-
-            </div>
         
         </main>
 

@@ -1,11 +1,12 @@
 from django.shortcuts import redirect
 from django.http.response import JsonResponse
 from django.db.models import F, Count
-from rest_framework import permissions, status
+from rest_framework import permissions, status, viewsets
+from rest_framework.decorators import action
 from rest_framework.views import APIView
 
 from tests.models import Test, UserPassedTest, Question, Option
-from tests.serializers import QuestionSerializer
+from tests.serializers import QuestionSerializer, UserPassedTestSerializer
 
 
 class GetQuestions(APIView):
@@ -32,49 +33,26 @@ class GetQuestions(APIView):
         return JsonResponse(serializer.data, safe=False)
 
 
-class CreateUserTestRelation(APIView):
+class UserPassedTestViewSet(viewsets.ModelViewSet):
 
+    queryset = UserPassedTest.objects.all()
+    serializer_class = UserPassedTestSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-    def post(self, request):
-
-        test_id = request.POST.get('test_id')
-        test = Test.objects.get(id=test_id)
-        
-        obj, created = UserPassedTest.objects.get_or_create(
-            user=request.user,
-            test=test
-        )
-
-        if created:
-            return JsonResponse({'success': 'created'}, status=status.HTTP_201_CREATED)
-        return JsonResponse({'error': 'already exists'}, status=status.HTTP_400_BAD_REQUEST)
-
-
-class SelectOption(APIView):
-
-    def post(self, request):
+    @action(detail=False, methods=['patch'], permission_classes=[permissions.IsAuthenticated])
+    def add_option(self, request):
 
         option_id = request.POST.get('option_id')
-        test_id = request.POST.get('test_id')
+        relation_id = request.POST.get('relation_id')
 
-        test = Test.objects.get(id=test_id)
         option = Option.objects.get(id=option_id)
-
-        relation_object = UserPassedTest.objects.get(
-            user=request.user,
-            test=test
-        )
+        relation_object = UserPassedTest.objects.get(id=relation_id)
 
         if not relation_object.questions_answered.filter(id=option.question.id).exists():
             relation_object.questions_answered.add(option.question)
             relation_object.selected_options.add(option)
-            UserPassedTest.objects.filter(
-                user=request.user,
-                test=test
-            ).update(
-                questions_answered_amount=F('questions_answered_amount') + 1
-            )
+            relation_object.questions_answered_amount = F('questions_answered_amount') + 1
+            relation_object.save()
         else:
             existing_option = relation_object.selected_options.get(question_id=option.question.id)
             relation_object.selected_options.remove(existing_option)
@@ -82,40 +60,18 @@ class SelectOption(APIView):
 
         return JsonResponse({'success': 'added'})
 
+    @action(detail=False, methods=['patch'], permission_classes=[permissions.IsAuthenticated])
+    def set_score(self, request):
 
-class SetTestCompleted(APIView):
+        relation_id = request.POST.get('relation_id')
 
-    def post(self, request):
+        relation_object = UserPassedTest.objects.get(id=relation_id)
 
-        test_id = request.POST.get('test_id')
-        test = Test.objects.get(id=test_id)
+        correct_answers = relation_object.selected_options.filter(is_correct=True).count()
+        answers = relation_object.questions_answered_amount
 
-        obj = UserPassedTest.objects.get(user=request.user, test=test)
+        score = correct_answers / answers
+        relation_object.score = score
+        relation_object.save()
 
-        correct_answers = obj.selected_options.filter(is_correct=True).count()
-        answers = obj.questions_answered_amount
-
-        score = round(correct_answers / answers, 2)
-
-        obj.is_completed = True
-        obj.score = score
-        obj.save()
-        
-        return JsonResponse({'success': correct_answers})
-
-
-class GetInitialTestStatus(APIView):
-
-    def get(self, request):
-
-        test_id = request.GET.get('test_id')
-        test = Test.objects.get(id=test_id)
-
-        obj = UserPassedTest.objects.get(user=request.user, test=test)
-
-        return JsonResponse(
-            {
-            'is_completed': obj.is_completed,
-            'start_from_question': obj.questions_answered_amount,
-            }
-        )
+        return JsonResponse({'success': score})
