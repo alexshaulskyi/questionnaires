@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import DetailView, CreateView, UpdateView, View
 
-from users.models import User, Notification
+from users.models import User
 from users.forms import SignUpForm, EditProfileForm
 from tests.models import UserPassedTest
 
