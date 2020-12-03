@@ -7,7 +7,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.db.models import Avg
 
-from users.models import User, Notification
+from users.models import User
 from tests.models import UserPassedTest
 
 
