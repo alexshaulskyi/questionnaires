@@ -76,6 +76,3 @@ class NotifyView(View):
             obj.flag = False
             obj.save()
             return JsonResponse({'success': 'stopped'})
-
-
-
