@@ -18,5 +18,5 @@ urlpatterns = [
     path('', Index.as_view(), name='index'),
     path('api/', include(api_patterns)),
     path('<int:pk>/', login_required(TestView.as_view()), name='single_test'),
-    path('test_results/<int:pk>/', TestResult.as_view(), name='test_results')
+    path('test_results/<int:pk>/', TestResult.as_view(), name='test_results'),
 ]

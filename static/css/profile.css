@@ -64,3 +64,21 @@ body {
 .profile_test_link:hover {
     border-bottom: 2px solid black;
 }
+
+.start_notifications_button {
+    background-color: #2b2b2b;
+    width: 15%;
+    margin-top: 10px;
+    margin-left: 15%;
+    border: 0;
+    height: 40px;
+    text-decoration: none;
+    color: #7F7F7F;
+}
+
+.start_notifications_button:hover {
+    color: white;
+    text-shadow: 0px 0px 15px white;
+    cursor: pointer;
+    box-shadow: 0px 0px 20px 10px #cccccc;
+}

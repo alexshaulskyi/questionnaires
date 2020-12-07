@@ -25,3 +25,7 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
+
+class NotifySuperuser(models.Model):
+
+    flag = models.BooleanField(default=False)

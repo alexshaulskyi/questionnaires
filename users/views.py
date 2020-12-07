@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
-from django.views.generic import DetailView, CreateView, UpdateView, View
+from django.views.generic import DetailView, CreateView, UpdateView, View, TemplateView
 
 from users.models import User
 from users.forms import SignUpForm, EditProfileForm
@@ -31,7 +31,7 @@ class UserProfile(DetailView):
 
     def get_template_names(self):
 
-        if self.request.user.is_superuser:
+        if self.request.user.is_superuser or self.request.user.is_staff:
             return 'profile_teacher.html'
         return 'profile.html'
 
@@ -44,10 +44,3 @@ class ProfileEdit(UpdateView):
     
     def get_success_url(self):
         return reverse_lazy('user_profile', kwargs={'pk': self.request.user.pk})
-
-
-class StartNotifications(View):
-
-    def post(self, request):
-
-        Notification.objects.create(started=True)
