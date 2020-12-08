@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import DetailView, CreateView, UpdateView, View, TemplateView
 
-from users.models import User
+from users.models import User, NotifySuperuser
 from users.forms import SignUpForm, EditProfileForm
 from tests.models import UserPassedTest
 
@@ -26,6 +26,7 @@ class UserProfile(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(UserProfile, self).get_context_data(**kwargs)
+        context['notificator'] = NotifySuperuser.objects.filter(id=1).exists()
         context['tests'] = UserPassedTest.objects.filter(user=self.request.user)
         return context
 

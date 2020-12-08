@@ -19,6 +19,7 @@ class Notify(threading.Thread):
         threading.Thread.__init__(self)
         self.event = threading.Event()
 
+
     def notifier(self):
 
         now = datetime.now().strftime("%H:%M:%S")
@@ -58,10 +59,10 @@ class NotifyView(View):
 
         if not request.user.is_superuser:
             return redirect('index')
+        
+        obj, created = NotifySuperuser.objects.get_or_create(id=1)
 
         notifier = Notify()
-
-        obj, created = NotifySuperuser.objects.get_or_create(id=1)
 
         if obj.flag == False:
 
@@ -73,6 +74,6 @@ class NotifyView(View):
         else:
 
             notifier.stop()
-            obj.flag = False
-            obj.save()
+            del notifier
+            obj.delete()
             return JsonResponse({'success': 'stopped'})

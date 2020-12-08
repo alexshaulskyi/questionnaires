@@ -6,7 +6,17 @@ function startNotifications () {
         type: 'get',
         success: function (data) {
 
-            console.log(data)
+            if (data.success === 'started') {
+
+                $('.start_notifications_button').empty()
+                $('.start_notifications_button').append('Прекратить оповещения')
+
+            } else if (data.success === 'stopped') {
+
+                $('.start_notifications_button').empty()
+                $('.start_notifications_button').append('Начать оповещение')
+
+            }
 
         }
 

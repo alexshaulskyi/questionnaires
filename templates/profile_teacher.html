@@ -1,5 +1,5 @@
 <!doctype html>
-{% load static custom_users_tags %}
+{% load static %}
 <html lang="en">
 
     <head>
@@ -59,12 +59,14 @@
 
             </div>
 
+            {{ get_notification_status }}
+
             <a class="profile_edit_button" href="{% url 'profile_edit' request.user.id %}"> Редактировать профиль </a>
-            {% if request.user.is_superuser %}
-                {% if not get_notification_status %}
-                    <button class="start_notifications_button"> Начать ооповещения </button>
+            {% if request.user.is_superuser%}
+                {% if not notificator %}
+                <button class="start_notifications_button"> Начать оповещения </button>
                 {% else %}
-                    <button class="start_notifications_button"> Прекратить оповещения </button>
+                <button class="start_notifications_button"> Прекратить оповещения </button>
                 {% endif %}
             {% endif %}
         
